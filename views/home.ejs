@@ -1,0 +1,42 @@
+<% layout('layouts/boilerplate') %>
+
+<style>
+    .hero {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        min-height: 80vh;
+    }
+    .hero h1 {
+        font-size: 4rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+    }
+    .hero p {
+        font-size: 1.2rem;
+        color: #555;
+        margin-bottom: 2rem;
+    }
+    .btn-start {
+        background-color: #fe424d;
+        color: white;
+        border: none;
+        border-radius: 2rem;
+        padding: 1rem 2.5rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        text-decoration: none;
+    }
+    .btn-start:hover {
+        background-color: #e03040;
+        color: white;
+    }
+</style>
+
+<div class="hero">
+    <h1>WanderLust</h1>
+    <p>Plan trips. Discover places. Create memories.</p>
+    <a href="/listings" class="btn-start">Start Planning →</a>
+</div>
