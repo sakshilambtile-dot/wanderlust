@@ -1,5 +1,7 @@
 if(process.env.NODE_ENV != "production"){
     require("dotenv").config();
+} else {
+    require("dotenv").config({ path: '/etc/secrets/.env' });
 }
 const express = require("express");
 const app = express();
