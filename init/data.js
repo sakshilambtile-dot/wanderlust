@@ -202,6 +202,34 @@ const sampleListings = [
     price: 1800, location: "Costa Rica", country: "Costa Rica",
     category: "camping",
   },
+  {
+    title: "Heritage Haveli in Jaipur",
+    description: "Stay in a stunning heritage haveli in the pink city of Jaipur. Experience royal Rajasthani culture.",
+    image: { filename: "listingimage", url: "https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?auto=format&fit=crop&w=800&q=60" },
+    price: 3500, location: "Jaipur", country: "India",
+    category: "rooms",
+},
+{
+    title: "Beachside Villa in Goa",
+    description: "Relax on the beautiful beaches of Goa in this stunning villa with private pool and ocean views.",
+    image: { filename: "listingimage", url: "https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=800&q=60" },
+    price: 2500, location: "Goa", country: "India",
+    category: "trending",
+},
+{
+    title: "Houseboat in Kerala",
+    description: "Experience the magical backwaters of Kerala on this traditional houseboat with modern amenities.",
+    image: { filename: "listingimage", url: "https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=60" },
+    price: 2000, location: "Kerala", country: "India",
+    category: "camping",
+},
+{
+    title: "Mountain Lodge in Manali",
+    description: "Escape to the snow-capped mountains of Manali in this cozy lodge with breathtaking Himalayan views.",
+    image: { filename: "listingimage", url: "https://images.unsplash.com/photo-1626621341517-bbf3d9990a23?auto=format&fit=crop&w=800&q=60" },
+    price: 1500, location: "Manali", country: "India",
+    category: "mountains",
+},
 ];
 
 module.exports = { data: sampleListings };
