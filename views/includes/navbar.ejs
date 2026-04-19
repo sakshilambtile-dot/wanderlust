@@ -1,0 +1,65 @@
+<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/listings"><i class="fa-solid fa-compass"></i></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link" href="/listings">Explore</a>
+      </div>
+      
+      <div class="navbar-nav mx-auto">
+        <form class="search-form d-flex" role="search" action="/listings" method="GET">
+          <div style="position: relative;">
+            <input class="search-input" type="search" name="search" id="searchInput"
+              placeholder="Search destinations" aria-label="Search" autocomplete="off"/>
+            <div class="search-dropdown" id="searchDropdown">
+              <div class="dropdown-section-title">Popular Countries</div>
+              <div class="dropdown-item-custom" onclick="selectSuggestion('India')"><span class="flag">🇮🇳</span> India</div>
+              <div class="dropdown-item-custom" onclick="selectSuggestion('United States')"><span class="flag">🇺🇸</span> United States</div>
+              <div class="dropdown-item-custom" onclick="selectSuggestion('France')"><span class="flag">🇫🇷</span> France</div>
+              <div class="dropdown-item-custom" onclick="selectSuggestion('Japan')"><span class="flag">🇯🇵</span> Japan</div>
+              <div class="dropdown-item-custom" onclick="selectSuggestion('Italy')"><span class="flag">🇮🇹</span> Italy</div>
+              <div class="dropdown-item-custom" onclick="selectSuggestion('Australia')"><span class="flag">🇦🇺</span> Australia</div>
+              <div class="dropdown-section-title">Popular Cities</div>
+              <div class="dropdown-item-custom" onclick="selectSuggestion('Mumbai')"><span class="flag">🏙️</span> Mumbai</div>
+              <div class="dropdown-item-custom" onclick="selectSuggestion('Paris')"><span class="flag">🗼</span> Paris</div>
+              <div class="dropdown-item-custom" onclick="selectSuggestion('New York')"><span class="flag">🗽</span> New York</div>
+              <div class="dropdown-item-custom" onclick="selectSuggestion('Tokyo')"><span class="flag">🗾</span> Tokyo</div>
+            </div>
+          </div>
+          <button class="btn btn-search" type="submit">
+            <i class="fa-solid fa-magnifying-glass"></i> Search
+          </button>
+        </form>
+      </div>
+
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link" href="/listings/new">Add new Listing</a>
+        <% if(!currUser){ %>
+        <a class="nav-link" href="/signup"><b>Sign up</b></a>
+        <a class="nav-link" href="/login"><b>Login</b></a>
+        <% } %><% if(currUser) { %>
+        <a class="nav-link" href="/logout"><b>Logout</b></a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const searchInput = document.getElementById("searchInput");
+  const searchDropdown = document.getElementById("searchDropdown");
+  searchInput.addEventListener("focus", () => { searchDropdown.classList.add("show"); });
+  document.addEventListener("click", (e) => {
+    if (!searchInput.contains(e.target) && !searchDropdown.contains(e.target)) {
+      searchDropdown.classList.remove("show");
+    }
+  });
+  function selectSuggestion(value) {
+    searchInput.value = value;
+    searchDropdown.classList.remove("show");
+    searchInput.closest("form").submit();
+  }
+</script>
