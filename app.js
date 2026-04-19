@@ -21,7 +21,6 @@ const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 
-// const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
 const dbUrl = process.env.ATLASDB_URL;
 
 main()
@@ -37,7 +36,7 @@ async function main() {
 }
 
 app.set("view engine", "ejs");
-app.set("views",path.join(__dirname,"views"));
+app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 app.engine('ejs', ejsMate);
@@ -49,29 +48,21 @@ const store = MongoStore.create({
     touchAfter: 24 * 3600,
 });
 
-store.on("error", ()=>{
+store.on("error", () => {
     console.log("ERROR IN MONGO SESSION STORE", err);
 });
 
 const sessionOptions = {
     store,
-    secret:  process.env.SECRET,
+    secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
-    cookie : {
-    expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
-    maxAge: 7 * 24 * 60 * 60 * 1000,
-    httpOnly: true,
+    cookie: {
+        expires: Date.now() + 7 * 24 * 60 * 60 * 1000,
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+        httpOnly: true,
     }
 };
-
-// app.get("/", (req, res)=>{
-//     res.send("hi, i am root");
-// });
-
-app.get("/", (req, res) => {
-    res.render("home.ejs");
-});
 
 app.use(session(sessionOptions));
 app.use(flash());
@@ -84,35 +75,32 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 app.use((req, res, next) => {
-    console.log(`${req.method} ${req.url}`);
-    next();
-});
-
-app.use((req, res, next) =>{
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
     res.locals.currUser = req.user;
     next();
 });
 
+app.get("/", (req, res) => {
+    res.render("home.ejs");
+});
+
 app.use("/", userRouter);
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 
-
-app.all("{*splat}", (req, res, next)=>{
-next(new ExpressError(404, "Page Not Found! "));
+app.all("{*splat}", (req, res, next) => {
+    next(new ExpressError(404, "Page Not Found!"));
 });
 
-app.use((err, req, res, next)=>{
+app.use((err, req, res, next) => {
     if(res.headersSent) {
         return next(err);
     }
-    let {statusCode=500, message="Something went wrong!"} = err;
-    res.locals.currUser = req.user; 
+    let {statusCode = 500, message = "Something went wrong!"} = err;
+    res.locals.currUser = req.user;
     res.status(statusCode).render("error.ejs", {message});
 });
-
 
 app.listen(8080, () => {
     console.log("server is listening to port 8080");
